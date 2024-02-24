@@ -6,7 +6,7 @@ int redPin = 4;
 int yellowPin = 5;
 int greenPin = 2;
 int greenarrowPin = 3;
-int buttonPin = 12;
+int switchPin = 12;
 int buzzerPin = 6;
 int ledPin = 13;
 
@@ -24,8 +24,8 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(yellowPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
-  pinMode(arrowPin, OUTPUT);
-  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(greenarrowPin, OUTPUT);
+  pinMode(switchPin, INPUT_PULLUP);
   pinMode(buzzerPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
 
@@ -54,7 +54,7 @@ void loop() {
       digitalWrite(redPin, HIGH);
       digitalWrite(yellowPin, LOW);
       digitalWrite(greenPin, LOW);
-      digitalWrite(arrowPin, LOW);
+      digitalWrite(greenarrowPin, LOW);
       break;
 
     case yellowState:
@@ -62,7 +62,7 @@ void loop() {
       digitalWrite(redPin, LOW);
       digitalWrite(yellowPin, HIGH);
       digitalWrite(greenPin, LOW);
-      digitalWrite(arrowPin, LOW);
+      digitalWrite(greenarrowPin, LOW);
       break;
 
     case greenState:
@@ -70,12 +70,12 @@ void loop() {
       digitalWrite(redPin, LOW);
       digitalWrite(yellowPin, LOW);
       digitalWrite(greenPin, HIGH);
-      digitalWrite(arrowPin, LOW);
+      digitalWrite(greenarrowPin, LOW);
       break;
   }
 
   // Check button press
-  if (digitalRead(buttonPin) == LOW) {
+  if (digitalRead(switchPin) == LOW) {
     // Switch to the next state in order: red -> yellow -> green -> red
     currentState = (currentState % 3) + 1;
     delay(1000);  // Debounce delay for demonstration purposes
