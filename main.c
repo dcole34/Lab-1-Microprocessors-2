@@ -29,7 +29,7 @@ void setup() {
   pinMode(buzzerPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
 
-  // Set up timer interrupt
+  // Set up timer interrupt (from example code)
   cli();  // Disable interrupts
   TCCR1A = 0;
   TCCR1B = 0;
@@ -50,7 +50,7 @@ void loop() {
   // Perform traffic light logic based on currentState
   switch (currentState) {
     case redState:
-      // Red state: Only turn on the red LED, turn off others
+      // Red state: Only turn on the red LED, keep others off
       digitalWrite(redPin, HIGH);
       digitalWrite(yellowPin, LOW);
       digitalWrite(greenPin, LOW);
@@ -58,7 +58,7 @@ void loop() {
       break;
 
     case yellowState:
-      // Yellow state: Only turn on the yellow LED, turn off others
+      // Yellow state: Only turn on the yellow LED, keep others off
       digitalWrite(redPin, LOW);
       digitalWrite(yellowPin, HIGH);
       digitalWrite(greenPin, LOW);
@@ -66,7 +66,7 @@ void loop() {
       break;
 
     case greenState:
-      // Green state: Only turn on the green LED, turn off others
+      // Green state: Only turn on the green LED, keep others off
       digitalWrite(redPin, LOW);
       digitalWrite(yellowPin, LOW);
       digitalWrite(greenPin, HIGH);
@@ -76,9 +76,9 @@ void loop() {
 
   // Check button press
   if (digitalRead(switchPin) == LOW) {
-    // Switch to the next state in order: red -> yellow -> green -> red
+    // Switch to the next state in order: red to yellow to green back to red
     currentState = (currentState % 3) + 1;
-    delay(1000);  // Debounce delay for demonstration purposes
+    delay(1000);  // Debounce delay
   }
 
   // Check the interrupt flag for the LED and the buzzer
